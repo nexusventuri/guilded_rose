@@ -43,17 +43,15 @@ class GildedRose
   end
 
   def update_backstage_concert_quality(item)
-    if item.name == "Backstage passes to a TAFKAL80ETC concert"
+    item.quality += 1
+
+    if item.sell_in < 6
+      item.quality += 2
+    elsif item.sell_in < 11
       item.quality += 1
-
-      if item.sell_in < 6
-        item.quality += 2
-      elsif item.sell_in < 11
-        item.quality += 1
-      end
-
-      constrain_item_quality(item)
     end
+
+    constrain_item_quality(item)
   end
 
   def update_backstage_concert_sell_in(item)
