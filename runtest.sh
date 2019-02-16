@@ -2,11 +2,11 @@
 
 set -e
 echo 'Running specs'
-rspec spec/**/*spec.rb
+bundle exec rspec spec/*spec.rb
 
 set +e
 output_file='spec/fixture/out.txt'
-ruby spec/texttest_fixture.rb > "$output_file"
+bundle exec ruby spec/texttest_fixture.rb > "$output_file"
 diff spec/fixture/original_output.txt "$output_file"
 
 if [[ $? == 1 ]]; then
