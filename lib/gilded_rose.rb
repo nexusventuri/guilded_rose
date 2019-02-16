@@ -12,13 +12,15 @@ class GildedRose
       if item.name == "Aged Brie"
         update_brie_quality(item)
         update_brie_sell_in(item)
+        constrain_item_quality(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_backstage_concert_quality(item)
-
         update_backstage_concert_sell_in(item)
+        constrain_item_quality(item)
       else
         update_generic_item_quality(item)
         update_generic_item_sell_in(item)
+        constrain_item_quality(item)
       end
     end
   end
@@ -26,8 +28,6 @@ class GildedRose
   def update_brie_sell_in(item)
     item.sell_in -= 1
     item.quality += 1 if item.sell_in < 0
-
-    constrain_item_quality(item)
   end
 
   def constrain_item_quality(item)
@@ -55,8 +55,6 @@ class GildedRose
   def update_backstage_concert_sell_in(item)
     item.sell_in -= 1
     item.quality = 0 if item.sell_in <= 0
-
-    constrain_item_quality(item)
   end
 
   def update_generic_item_quality(item)
@@ -66,8 +64,6 @@ class GildedRose
   def update_generic_item_sell_in(item)
     item.sell_in -= 1
     item.quality -= 1 if item.sell_in < 0
-
-    constrain_item_quality(item)
   end
 end
 
