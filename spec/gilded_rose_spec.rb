@@ -48,9 +48,10 @@ describe GildedRose do
     end
   end
 
-  xcontext 'Sulfuras' do
+  context 'Sulfuras' do
     it 'does not change in value' do
-
+      items = wait_two_days([Item.new('Sulfuras, Hand of Ragnaros', sell_in = 0, quality=80)])
+      expect(items[0].quality).to eq 80
     end
   end
 
