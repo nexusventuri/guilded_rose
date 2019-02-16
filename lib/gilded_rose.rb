@@ -11,15 +11,18 @@ class GildedRose
       next if item.name == "Sulfuras, Hand of Ragnaros"
       if item.name == "Aged Brie"
         update_brie_quality(item)
+        update_sell_in(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_backstage_concert_quality(item)
+
+        update_sell_in(item)
       else
         if item.quality > 0
           item.quality = item.quality - 1
         end
+        update_sell_in(item)
       end
 
-      item.sell_in = item.sell_in - 1
 
       if item.sell_in < 0
         if item.name == "Aged Brie"
@@ -62,6 +65,10 @@ class GildedRose
 
       constrain_item_quality(item)
     end
+  end
+
+  def update_sell_in(item)
+    item.sell_in = item.sell_in - 1
   end
 end
 
