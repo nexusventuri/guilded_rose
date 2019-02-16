@@ -2,7 +2,9 @@ class EnhancedItem
   attr_reader :item
 
   def self.from_item(item)
-    if item.name == "Sulfuras, Hand of Ragnaros"
+    if item.name =~ /^Conjured/
+      Conjured.new(item)
+    elsif item.name == "Sulfuras, Hand of Ragnaros"
       Sulfuras.new(item)
     elsif item.name == "Aged Brie"
       AgedBrie.new(item)

@@ -53,6 +53,28 @@ describe GildedRose do
     end
   end
 
+  context 'Conjured items' do
+    it 'decreases in quality' do
+      items = wait_two_days([Item.new('Conjured fish', sell_in = 3, quality=20)])
+      expect(items[0].quality).to eq 16
+    end
+
+    it 'after sell in date decreases in quality twice as fast' do
+      items = wait_two_days([Item.new('Conjured cake', sell_in = 0, quality=20)])
+      expect(items[0].quality).to eq 12
+    end
+
+    it 'does not decrease in quality below 0' do
+      items = wait_two_days([Item.new('Generic item', sell_in = 0, quality=1)])
+      expect(items[0].quality).to eq 0
+    end
+
+    it 'can have negative sell in date' do
+      items = wait_two_days([Item.new('Generic item', sell_in = 0, quality=1)])
+      expect(items[0].sell_in).to eq(-2)
+    end
+  end
+
   context 'Sulfuras' do
     it 'does not change in value' do
       items = wait_two_days([Item.new('Sulfuras, Hand of Ragnaros', sell_in = 0, quality=80)])

@@ -4,6 +4,7 @@ require_relative 'aged_brie'
 require_relative 'backstage_pass'
 require_relative 'generic_item'
 require_relative 'sulfuras'
+require_relative 'conjured'
 
 class GildedRose
 
