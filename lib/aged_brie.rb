@@ -1,6 +1,6 @@
 class AgedBrie < EnhancedItem
   def update_quality
-    @item.quality += 1
+    item.quality += 1
   end
 
   def update_sell_in
