@@ -15,7 +15,7 @@ class GildedRose
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_backstage_concert_quality(item)
 
-        update_sell_in(item)
+        update_backstage_concert_sell_in(item)
       else
         if item.quality > 0
           item.quality -= 1
@@ -25,13 +25,9 @@ class GildedRose
 
 
       if item.sell_in < 0
-        next if item.name == "Aged Brie"
-        if item.name == "Backstage passes to a TAFKAL80ETC concert"
-          item.quality = 0
-        else
-          if item.quality > 0
-            item.quality -= 1
-          end
+        next if item.name == "Aged Brie" || item.name == "Backstage passes to a TAFKAL80ETC concert"
+        if item.quality > 0
+          item.quality -= 1
         end
       end
     end
@@ -67,6 +63,14 @@ class GildedRose
       end
 
       constrain_item_quality(item)
+    end
+  end
+
+  def update_backstage_concert_sell_in(item)
+    item.sell_in -= 1
+
+    if item.sell_in <= 0
+      item.quality = 0
     end
   end
 
