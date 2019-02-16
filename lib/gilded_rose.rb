@@ -39,11 +39,15 @@ class GildedRose
     end
   end
 
-  def update_brie_quality(item)
-    item.quality = item.quality + 1
+  def constrain_item_quality(item)
     if item.quality > 50
       item.quality = 50
     end
+  end
+
+  def update_brie_quality(item)
+    item.quality = item.quality + 1
+    constrain_item_quality(item)
   end
 
   def update_backstage_concert_quality(item)
@@ -56,9 +60,7 @@ class GildedRose
         item.quality = item.quality + 1
       end
 
-      if item.quality > 50
-        item.quality = 50
-      end
+      constrain_item_quality(item)
     end
   end
 end
