@@ -60,8 +60,30 @@ describe GildedRose do
     end
 
     it 'can have negative sell in date' do
-      items = wait_two_days([Item.new('Sulfuras, Hand of Ragnaros', sell_in = 0, quality=1)])
-      expect(items[0].sell_in).to eq(-2)
+      items = wait_two_days([Item.new('Sulfuras, Hand of Ragnaros', sell_in = -1, quality=1)])
+      expect(items[0].sell_in).to eq(-1)
+    end
+  end
+
+  context 'Backstage passes' do
+    it 'increases in value every day' do
+      items = wait_two_days([Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in = 50, quality=30)])
+      expect(items[0].quality).to eq 32
+    end
+
+    it 'increases twice in value when there are 10 days or less from the concert' do
+      items = wait_two_days([Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in = 10, quality=30)])
+      expect(items[0].quality).to eq 34
+    end
+
+    it 'increases the value by 3 when there are 5 days or less from the concert' do
+      items = wait_two_days([Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in = 5, quality=30)])
+      expect(items[0].quality).to eq 36
+    end
+
+    it 'decreases the value to 0 after the concert' do
+      items = wait_two_days([Item.new('Backstage passes to a TAFKAL80ETC concert', sell_in = 1, quality=30)])
+      expect(items[0].quality).to eq 0
     end
   end
 
