@@ -17,14 +17,8 @@ class GildedRose
 
         update_backstage_concert_sell_in(item)
       else
-        if item.quality > 0
-          item.quality -= 1
-        end
-        update_sell_in(item)
-
-        if item.sell_in < 0 && item.quality > 0
-          item.quality -= 1
-        end
+        update_generic_item_quality(item)
+        update_generic_item_sell_in(item)
       end
     end
   end
@@ -70,8 +64,18 @@ class GildedRose
     end
   end
 
-  def update_sell_in(item)
+  def update_generic_item_quality(item)
+    if item.quality > 0
+      item.quality -= 1
+    end
+  end
+
+  def update_generic_item_sell_in(item)
     item.sell_in -= 1
+
+    if item.sell_in < 0 && item.quality > 0
+      item.quality -= 1
+    end
   end
 end
 
