@@ -25,6 +25,10 @@ class EnhancedItem
     constrain_item_quality
   end
 
+  def update_sell_in
+    item.sell_in -= 1
+  end
+
   def constrain_item_quality
     if item.quality > 50
       item.quality = 50
