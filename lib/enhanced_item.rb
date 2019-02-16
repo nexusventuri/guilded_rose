@@ -1,6 +1,18 @@
 class EnhancedItem
   attr_reader :item
 
+  def self.from_item(item)
+    if item.name == "Sulfuras, Hand of Ragnaros"
+      Sulfuras.new(item)
+    elsif item.name == "Aged Brie"
+      AgedBrie.new(item)
+    elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
+      BackstagePass.new(item)
+    else
+      GenericItem.new(item)
+    end
+  end
+
   def initialize(item)
     @item = item
   end

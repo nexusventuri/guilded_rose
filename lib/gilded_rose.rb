@@ -13,15 +13,7 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
-      if item.name == "Sulfuras, Hand of Ragnaros"
-        Sulfuras.new(item).update
-      elsif item.name == "Aged Brie"
-        AgedBrie.new(item).update
-      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
-        BackstagePass.new(item).update
-      else
-        GenericItem.new(item).update
-      end
+      EnhancedItem::from_item(item).update
     end
   end
 end
