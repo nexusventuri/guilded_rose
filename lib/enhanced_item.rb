@@ -20,8 +20,8 @@ class EnhancedItem
   end
 
   def update
-    update_quality
     update_sell_in
+    update_quality
     constrain_item_quality
   end
 
