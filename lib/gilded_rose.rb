@@ -8,12 +8,12 @@ require_relative 'sulfuras'
 class GildedRose
 
   def initialize(items)
-    @items = items
+    @items = items.map { |item| EnhancedItem::from_item(item) }
   end
 
   def update_quality()
     @items.each do |item|
-      EnhancedItem::from_item(item).update
+      item.update
     end
   end
 end
