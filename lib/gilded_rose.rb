@@ -21,12 +21,8 @@ class GildedRose
           item.quality -= 1
         end
         update_sell_in(item)
-      end
 
-
-      if item.sell_in < 0
-        next if item.name == "Aged Brie" || item.name == "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
+        if item.sell_in < 0 && item.quality > 0
           item.quality -= 1
         end
       end
