@@ -35,4 +35,38 @@ describe GildedRose do
       expect(items[0].quality).to eq 5
     end
   end
+
+  context 'Generic item' do
+    it 'Decreases in quality' do
+      items = [Item.new('Generic item', sell_in = 3, quality=20)]
+      rose = GildedRose.new(items)
+      rose.update_quality()
+      rose.update_quality()
+      expect(items[0].quality).to eq 18
+    end
+
+    it 'After sell in date decreases in quality twice as fast' do
+      items = [Item.new('Generic item', sell_in = 0, quality=20)]
+      rose = GildedRose.new(items)
+      rose.update_quality()
+      rose.update_quality()
+      expect(items[0].quality).to eq 16
+    end
+
+    it 'Does not decrease in quality below 0' do
+      items = [Item.new('Generic item', sell_in = 0, quality=1)]
+      rose = GildedRose.new(items)
+      rose.update_quality()
+      rose.update_quality()
+      expect(items[0].quality).to eq 0
+    end
+
+    it 'Can have negative sell in date' do
+      items = [Item.new('Generic item', sell_in = 0, quality=1)]
+      rose = GildedRose.new(items)
+      rose.update_quality()
+      rose.update_quality()
+      expect(items[0].sell_in).to eq(-2)
+    end
+  end
 end
